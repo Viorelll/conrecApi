@@ -1,0 +1,9 @@
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\bin\Debug\netstandard2.0\Conrec.Infrastructure.deps.json
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\bin\Debug\netstandard2.0\Conrec.Infrastructure.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\bin\Debug\netstandard2.0\Conrec.Infrastructure.pdb
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.AssemblyInfo.cs
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.pdb
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Infrastructure\obj\Debug\netstandard2.0\Conrec.Infrastructure.csprojAssemblyReference.cache

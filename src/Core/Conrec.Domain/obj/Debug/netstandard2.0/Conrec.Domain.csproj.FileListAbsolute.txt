@@ -1,0 +1,11 @@
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\bin\Debug\netstandard2.0\Conrec.Domain.deps.json
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\bin\Debug\netstandard2.0\Conrec.Domain.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\bin\Debug\netstandard2.0\Conrec.Domain.pdb
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\bin\Debug\netstandard2.0\System.ComponentModel.Annotations.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\bin\Debug\netstandard2.0\System.ComponentModel.Annotations.xml
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.csproj.CoreCompileInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.AssemblyInfoInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.AssemblyInfo.cs
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.csproj.CopyComplete
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Core\Conrec.Domain\obj\Debug\netstandard2.0\Conrec.Domain.pdb

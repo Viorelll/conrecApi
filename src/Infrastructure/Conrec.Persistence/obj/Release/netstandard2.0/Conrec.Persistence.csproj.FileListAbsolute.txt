@@ -1,0 +1,12 @@
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\bin\Release\netstandard2.0\Conrec.Persistence.deps.json
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\bin\Release\netstandard2.0\Conrec.Persistence.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\bin\Release\netstandard2.0\Conrec.Persistence.pdb
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\bin\Release\netstandard2.0\Conrec.Domain.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\bin\Release\netstandard2.0\Conrec.Domain.pdb
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.csprojAssemblyReference.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.AssemblyInfoInputs.cache
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.AssemblyInfo.cs
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.csproj.CopyComplete
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.dll
+C:\Users\ViAzureUser\source\repos\Conrec\src\Infrastructure\Conrec.Persistence\obj\Release\netstandard2.0\Conrec.Persistence.pdb
