@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Core\\Conrec.Domain\\Conrec.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Core\\Conrec.Domain\\Conrec.Domain.csproj",
       "projectName": "Conrec.Domain",
-      "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Core\\Conrec.Domain\\Conrec.Domain.csproj",
+      "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Core\\Conrec.Domain\\Conrec.Domain.csproj",
       "packagesPath": "C:\\Users\\ViAzureUser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Core\\Conrec.Domain\\obj\\",
+      "outputPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Core\\Conrec.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

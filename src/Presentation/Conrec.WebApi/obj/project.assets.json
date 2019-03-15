@@ -13049,11 +13049,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Presentation\\Conrec.WebApi\\Conrec.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Presentation\\Conrec.WebApi\\Conrec.WebApi.csproj",
       "projectName": "Conrec.WebApi",
-      "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Presentation\\Conrec.WebApi\\Conrec.WebApi.csproj",
+      "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Presentation\\Conrec.WebApi\\Conrec.WebApi.csproj",
       "packagesPath": "C:\\Users\\ViAzureUser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Presentation\\Conrec.WebApi\\obj\\",
+      "outputPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Presentation\\Conrec.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13072,11 +13072,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Core\\Conrec.Application\\Conrec.Application.csproj": {
-              "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Core\\Conrec.Application\\Conrec.Application.csproj"
+            "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Core\\Conrec.Application\\Conrec.Application.csproj": {
+              "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Core\\Conrec.Application\\Conrec.Application.csproj"
             },
-            "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Infrastructure\\Conrec.Persistence\\Conrec.Persistence.csproj": {
-              "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\Conrec\\src\\Infrastructure\\Conrec.Persistence\\Conrec.Persistence.csproj"
+            "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Infrastructure\\Conrec.Persistence\\Conrec.Persistence.csproj": {
+              "projectPath": "C:\\Users\\ViAzureUser\\source\\repos\\conrecApi\\src\\Infrastructure\\Conrec.Persistence\\Conrec.Persistence.csproj"
             }
           }
         }
