@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Conrec.Application.Employees.Commands.CreateEmployee;
 using Conrec.Application.Employees.Commands.DeleteEmployee;
 using Conrec.Application.Employees.Commands.UpdateEmployee;
 using Conrec.Application.Employees.Queries.GetEmployeeDetail;
+using Conrec.Application.Employees.Commands.CreateTeam;
+using Conrec.Application.Employees.Commands.AttachTeam;
+using Conrec.Application.Employees.Commands.CreateDocument;
+using Conrec.Application.Employees.Commands.AttachProject;
+using Conrec.Application.Employees.Commands.CreateProjectFeedback;
 
 namespace Conrec.WebApi.Controllers
 {
@@ -50,6 +54,53 @@ namespace Conrec.WebApi.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await Mediator.Send(new DeleteEmployeeCommand { Id = id });
+
+            return NoContent();
+        }
+
+
+        [HttpPost]
+        [Route("createTeam")]
+        public async Task<IActionResult> PostCreateTeam(CreateTeamCommand createTeamCommand)
+        {
+            await Mediator.Send(createTeamCommand);
+
+            return NoContent();
+        }
+
+
+        [HttpPost]
+        [Route("attachTeam")]
+        public async Task<IActionResult> PostAttachTeam(AttachTeamCommand attachTeamCommand)
+        {
+            await Mediator.Send(attachTeamCommand);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("attachProject")]
+        public async Task<IActionResult> PostAttachProject(AttachProjectCommand attachProjectCommand)
+        {
+            await Mediator.Send(attachProjectCommand);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("createDocuments")]
+        public async Task<IActionResult> PostCreateDocuments(CreateDocumentCommand createDocumentCommand)
+        {
+            await Mediator.Send(createDocumentCommand);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("createProjectFeedback")]
+        public async Task<IActionResult> PostCreateProjectFeedback(CreateProjectFeedbackCommand createProjectFeedback)
+        {
+            await Mediator.Send(createProjectFeedback);
 
             return NoContent();
         }

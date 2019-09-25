@@ -8,7 +8,10 @@ namespace Conrec.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Employer> builder)
         {
-            #region Keys
+
+           #region Keys
+
+            builder.Property(primaryKey => primaryKey.Id);
 
             builder
                 .HasOne(e => e.JobRole)

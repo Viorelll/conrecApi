@@ -8,7 +8,7 @@ namespace Conrec.Domain.Entities
         public Employee()
         {
             Documents = new HashSet<Document>();
-            Projects = new HashSet<Project>();
+            ProjectEmployees = new HashSet<ProjectEmployee>();
         }
         public int Id { get; set; }
         public string NINO { get; set; }
@@ -17,18 +17,17 @@ namespace Conrec.Domain.Entities
         public DateTimeOffset? AvailabilStartsOn { get; set; }
 
         #region Links
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int CountryId { get; set; }
-        public Country Country { get; set; }
+        public virtual Country Country { get; set; }
         public int SkillId { get; set; }
-        public Skill Skill { get; set; }
+        public virtual Skill Skill { get; set; }
         public int? TeamId { get; set; }
-        public Team Team { get; set; }
+        public virtual Team Team { get; set; }
         public int? AdditionalInformationId { get; set; }
-        public AdditionalInformation AdditionalInformation { get; set; }
-        public ICollection<Project> Projects { get; set; }
-        public ICollection<Document> Documents { get; set; }
+        public virtual AdditionalInformation AdditionalInformation { get; set; }
+        public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
         #endregion
     }
 }

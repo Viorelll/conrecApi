@@ -27,13 +27,13 @@ namespace Conrec.Application.Employees.Commands.DeleteEmployee
                 throw new Exception(nameof(Employee));
             }
 
-            var hasProjects = _context.Project.Any(o => o.UserId == entity.UserId);
+            var hasProjects = _context.Project.Any(o => o.UserId == entity.Id);
             if (hasProjects)
             {
                 throw new Exception("There are existing projects associated with this Employee.");
             }
 
-            var hasDocuments = _context.Document.Any(o => o.UserId == entity.UserId);
+            var hasDocuments = _context.Document.Any(o => o.UserId == entity.Id);
             if (hasDocuments)
             {
                 throw new Exception("There are existing documents associated with this Employee.");

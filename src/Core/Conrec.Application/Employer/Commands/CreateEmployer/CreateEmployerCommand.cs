@@ -1,12 +1,12 @@
-﻿using Conrec.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace Conrec.Application.Employees.Commands.CreateEmployer
 {
-    public class CreateEmployerCommand : IRequest
+    using Conrec.Application.Models;
+    public class CreateEmployerCommand : IRequest<int>
     {
-        public User User { get; set; }
+        public CreateEmployerModel Employer { get; set; }
         public int JobRoleId { get; set; }
-        public Company Company { get; set; }
+        public CreateCompanyModel Company { get; set; }
     }
 }

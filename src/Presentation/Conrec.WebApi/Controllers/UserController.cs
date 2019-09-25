@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Conrec.Application.Employees.Queries.GetUserDetail;
 using Microsoft.AspNetCore.Mvc;
+using Conrec.Application.Models;
+using Conrec.Application.User.Queries.GetUserDetail;
 
 namespace Conrec.WebApi.Controllers
 {

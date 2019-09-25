@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Conrec.Domain.Entities;
 using Conrec.Persistence;
+using Conrec.Application.Models;
 
 namespace Conrec.Application.Employees.Queries.GetEmployerDetail
 {
@@ -18,8 +19,7 @@ namespace Conrec.Application.Employees.Queries.GetEmployerDetail
 
         public async Task<EmployerDetailModel> Handle(GetEmployerDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Employer
-                .FindAsync(request.Id);
+            var entity = await _context.Employer.FindAsync(request.Id);
 
             if (entity == null)
             {

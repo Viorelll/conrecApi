@@ -25,7 +25,13 @@ namespace Conrec.Persistence.Configurations
             #region Keys
 
             builder.HasKey(primaryKey => primaryKey.Id);
+
             builder.HasIndex(x => x.CurrencyId).IsUnique(false);
+
+            builder.HasIndex(x => x.PaymentFrequencyId).IsUnique(false);
+
+            builder.HasIndex(x => x.PaymentTypeId).IsUnique(false);
+
 
             #endregion
         }

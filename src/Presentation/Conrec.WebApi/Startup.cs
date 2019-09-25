@@ -8,10 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Reflection;
-using Conrec.Application.Employees.Queries.GetEmployeeDetail;
 using MediatR;
-using MediatR.Pipeline;
 using Conrec.Application.Employees.Commands.CreateEmployee;
+using Conrec.Cryptography;
+using Conrec.Cryptography.SHA512;
+using Microsoft.Extensions.Hosting;
 
 namespace Conrec.WebApi
 {
@@ -28,25 +29,38 @@ namespace Conrec.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add MediatR
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddMediatR(typeof(CreateEmployeeCommand).GetTypeInfo().Assembly);
+
+            services.AddScoped<ICryptHash, CryptSHA512>();
+            services.AddScoped<PasswordManager>();
 
             // Add DbContext using SQL Server Provider
             services.AddDbContext<ConrecDbContext>(options =>
-                options.UseSqlServer("Server =.; Database = Conrec; Trusted_Connection = True; Application Name = Conrec;"));
+                options.UseSqlServer(Configuration.GetConnectionString("ConrecDatabase")));
 
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddNewtonsoftJson(options =>
+            {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            // Register the Swagger services
+            services.AddOpenApiDocument(config =>
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "Conrec API";
+                    document.Info.Description = "ASP.NET Core web API";
+                    document.Info.TermsOfService = "None";
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -57,8 +71,13 @@ namespace Conrec.WebApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+
+            app.UseSwaggerUi3(options => {
+                options.Path = "/api";
+                options.ServerUrl = "13.94.145.247";
+            });
         }
     }
 }

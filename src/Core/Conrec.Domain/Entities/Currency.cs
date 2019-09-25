@@ -3,7 +3,7 @@ namespace Conrec.Domain.Entities
     public class Currency : RefType
     {
         #region Links
-        public Payment Payment { get; set; }
+        public virtual Payment Payment { get; set; }
         #endregion
     }
 }

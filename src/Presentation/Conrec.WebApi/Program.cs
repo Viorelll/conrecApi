@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,13 +15,6 @@ namespace Conrec.WebApi
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-
-            //var host = new WebHostBuilder()
-            //              .UseKestrel()
-            //              .UseContentRoot(Directory.GetCurrentDirectory())
-            //              .UseIISIntegration()
-            //              .UseStartup<Startup>()
-            //              .Build();
 
             using (var scope = host.Services.CreateScope())
             {
@@ -43,7 +37,24 @@ namespace Conrec.WebApi
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            new WebHostBuilder()
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        var env = hostingContext.HostingEnvironment;
+                        config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                                .AddJsonFile($"appsettings.Local.json", optional: true, reloadOnChange: true)
+                                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                        config.AddEnvironmentVariables();
+                    })
+                    .ConfigureLogging((hostingContext, logging) =>
+                    {
+                        logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                        logging.AddConsole();
+                        logging.AddDebug();
+                    })
+                    .UseStartup<Startup>();
     }
 }

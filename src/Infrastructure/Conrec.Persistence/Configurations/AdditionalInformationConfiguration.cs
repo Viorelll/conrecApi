@@ -1,6 +1,6 @@
-﻿using Conrec.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Conrec.Domain.Entities;
 
 namespace Conrec.Persistence.Configurations
 {

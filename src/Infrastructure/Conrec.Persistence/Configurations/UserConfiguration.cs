@@ -12,6 +12,8 @@ namespace Conrec.Persistence.Configurations
 
             builder.Property(e => e.LastName).HasMaxLength(100);
 
+            builder.Property(e => e.Password).HasMaxLength(512);
+
             builder.Property(e => e.Email).HasMaxLength(100);
 
             builder.Property(e => e.RegisterDate);
@@ -23,12 +25,14 @@ namespace Conrec.Persistence.Configurations
             builder
               .HasOne(u => u.Employee)
               .WithOne(u => u.User)
-              .HasForeignKey<Employee>(u => u.UserId);
+              .HasForeignKey<Employee>(u => u.Id)
+              .IsRequired();
 
             builder
               .HasOne(ur => ur.Employer)
               .WithOne(u => u.User)
-              .HasForeignKey<Employer>(u => u.UserId);
+              .HasForeignKey<Employer>(u => u.Id)
+              .IsRequired();
 
             builder
                .HasOne(ur => ur.UserRole)

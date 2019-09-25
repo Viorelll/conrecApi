@@ -1,4 +1,6 @@
-﻿using Conrec.Domain.Entities;
+﻿using Conrec.Application.Models;
+using Conrec.Cryptography;
+using Conrec.Domain.Entities;
 using Conrec.Persistence;
 using MediatR;
 using System;
@@ -10,75 +12,73 @@ namespace Conrec.Application.Employees.Commands.CreateEmployee
     public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, Unit>
     {
         private readonly ConrecDbContext _context;
-        //private readonly IMediator _mediator;
-
-        public CreateEmployeeCommandHandler(
-            ConrecDbContext context,
-            IMediator mediator)
+        private readonly PasswordManager _passwordManager;
+        public CreateEmployeeCommandHandler(ConrecDbContext context, PasswordManager passwordManager)
         {
             _context = context;
-            // _mediator = mediator;
+            _passwordManager = passwordManager;
         }
 
         public async Task<Unit> Handle(CreateEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Employee
+            if (request.User == null)
             {
+                throw new Exception(nameof(User) + " doesn't exist");
+            }
+
+            var userModel = request.User;
+            userModel.RegisterDate = DateTimeOffset.Now;
+            userModel.Password = _passwordManager.EncryptPassword(userModel.Password, CreatePasswordSalt(userModel));
+
+            var userRole = _context.UserRole.Find(1); // user role for employee
+
+            var user = new Domain.Entities.User
+            {
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
+                Email = userModel.Email,
+                Password = userModel.Password,
+                RegisterDate = userModel.RegisterDate,
+                Region = new Region
+                {
+                    Id = userModel.RegionId
+                },
+                UserRole = userRole
+            };
+
+            var employee = new Employee
+            {
+                User = user,
                 NINO = request.NINO,
                 Experience = request.Experience,
                 AvailabilWorkImmediate = request.AvailabilWorkImmediate,
                 AvailabilStartsOn = request.AvailabilStartsOn,
-                User = request.User,
                 CountryId = request.CountryId,
-                SkillId = request.SkillId,
-                AdditionalInformation = request.AdditionalInformation,
-                Documents = request.Documents,
-                Projects = request.Projects
+                SkillId = request.SkillId
             };
 
+            if (request.AdditionalInformation != null)
+            {
+                employee.AdditionalInformation = new AdditionalInformation
+                {
+                    HasOwnCar = request.AdditionalInformation.HasOwnCar,
+                    HasRequiredPPE = request.AdditionalInformation.HasRequiredPPE,
+                    WillingMiles = request.AdditionalInformation.WillingMiles,
+                    Details = request.AdditionalInformation.Details
+                };
+            }
+
             // save user
-            _context.Employee.Add(entity);
+            _context.Employee.Add(employee);
 
             await _context.SaveChangesAsync(cancellationToken);
-
-            // attach team
-            await AttachTeam(request, entity, cancellationToken);
-
-            //await _mediator.Publish(new CustomerCreated { CustomerId = entity.CustomerId });
 
             return Unit.Value;
         }
 
-        private async Task AttachTeam(CreateEmployeeCommand request, Employee entity, CancellationToken cancellationToken)
+        private string CreatePasswordSalt(UserDetailModel user)
         {
-            var employee = _context.Employee.Find(entity.Id);
-
-            var team = _context.Team.Find(request.Team.Id);
-
-            // attach existed to team
-            if (team != null)
-            {
-                team.Members.Add(employee);
-            }
-
-            if (team == null && request.Team != null)
-            {
-                // create new team
-                employee.Team = new Team
-                {
-                    SalaryPaymentId = request.Team.SalaryPaymentId,
-                    LeaderId = entity.Id
-                };
-
-                // create new notification
-                employee.User.Notifications.Add(new Notification
-                {
-                    DateOn = DateTimeOffset.Now
-                });
-            }
-
-            _context.Employee.Attach(entity);
-            await _context.SaveChangesAsync(cancellationToken);
+            return user.Email.GetHashCode().ToString() + user.RegisterDate.Value.DateTime.ToString();
         }
     }
 }

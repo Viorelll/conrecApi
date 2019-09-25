@@ -1,6 +1,6 @@
 namespace Conrec.Domain.Entities
 {
-    public class Performance
+    public class Report
     {
         public int Id { get; set; }
         public int Absences { get; set; }
@@ -11,7 +11,8 @@ namespace Conrec.Domain.Entities
         public string Review { get; set; }
 
         #region Links
-        public Project Project { get; set; }
+        public int? ProjectEmployeeId { get; set; }
+        public virtual ProjectEmployee ProjectEmployee { get; set; }
         #endregion
     }
 }

@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Conrec.Domain.Entities;
 using Conrec.Persistence;
+using Conrec.Application.Models;
 
-namespace Conrec.Application.Employees.Queries.GetUserDetail
+namespace Conrec.Application.User.Queries.GetUserDetail
 {
     public class GetUserDetailQueryHandler : IRequestHandler<GetUserDetailQuery, UserDetailModel>
     {

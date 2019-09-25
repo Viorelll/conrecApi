@@ -7,7 +7,7 @@ namespace Conrec.Domain.Entities
         public string PostCode { get; set; }
 
         #region Links
-        public User User { get; set; }
+        public virtual User User { get; set; }
         #endregion
     }
 }

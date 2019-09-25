@@ -7,13 +7,11 @@ namespace Conrec.Domain.Entities
     {
         public Project()
         {
-            Schedules = new HashSet<Schedule>();
-            Rates = new HashSet<Rate>();
+            ProjectEmployees = new HashSet<ProjectEmployee>();
+            ProjectSchedules = new HashSet<ProjectSchedule>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool IsActive { get; set; }
-        public int TotalTimeWork { get; set; } // investigate if needed
         public string Requires { get; set; }
         public string Website { get; set; }
         public DateTimeOffset FilledBy { get; set; }
@@ -24,13 +22,11 @@ namespace Conrec.Domain.Entities
 
         #region Links
         public int UserId { get; set; }
-        public Employee Employee { get; set; }
         public int CompanyId { get; set; }
-        public Company Company { get; set; }
-        public int PerformanceId { get; set; }
-        public Performance Performance { get; set; }
-        public ICollection<Schedule> Schedules { get; private set; }
-        public ICollection<Rate> Rates { get; private set; }
+        public virtual Company Company { get; set; }
+        public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+        public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }
+        public virtual ICollection<ProjectPayment> ProjectPayments { get; set; }
 
         #endregion
     }

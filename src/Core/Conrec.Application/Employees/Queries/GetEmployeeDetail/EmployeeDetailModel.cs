@@ -1,6 +1,8 @@
-﻿using Conrec.Domain.Entities;
+﻿using Conrec.Application.Models;
+using Conrec.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
@@ -16,7 +18,7 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
         public int SkillId { get; set; }
         public int? TeamId { get; set; }
         public int? AdditionalInformationId { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        public ICollection<ProjectEmployeeModel> Projects { get; set; }
         public ICollection<Document> Documents { get; set; }
 
         public static Expression<Func<Employee, EmployeeDetailModel>> Projection
@@ -35,7 +37,13 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
                     TeamId = employee.TeamId,
                     AdditionalInformationId = employee.AdditionalInformationId,
                     Documents = employee.Documents,
-                    Projects = employee.Projects
+                    Projects = employee.ProjectEmployees.Select(x => new ProjectEmployeeModel
+                    {
+                        ProjectId = x.ProjectId,
+                        EmployeeId = x.EmployeeId,
+                        IsActive = x.IsActive,
+                        TotalTimeWork = x.TotalTimeWork
+                    }).ToList()
                 };
             }
         }

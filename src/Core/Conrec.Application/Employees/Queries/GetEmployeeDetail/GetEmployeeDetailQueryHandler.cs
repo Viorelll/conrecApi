@@ -26,7 +26,9 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
                 throw new Exception(nameof(Employee) + request.Id);
             }
 
-            return EmployeeDetailModel.Create(entity);
+            var result = EmployeeDetailModel.Create(entity);
+
+            return result;
         }
     }
 }

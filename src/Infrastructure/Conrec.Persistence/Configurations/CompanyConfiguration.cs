@@ -16,6 +16,11 @@ namespace Conrec.Persistence.Configurations
 
             builder.HasKey(primaryKey => primaryKey.Id);
 
+            builder
+               .HasMany(c => c.Projects)
+               .WithOne(p => p.Company)
+               .HasForeignKey(c => c.CompanyId);
+
             #endregion
         }
     }

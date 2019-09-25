@@ -9,7 +9,7 @@ namespace Conrec.Domain.Entities
         public bool HasRequiredPPE { get; set; }
 
         #region Links
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         #endregion
     }
 }

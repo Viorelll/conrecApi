@@ -8,7 +8,7 @@ namespace Conrec.Domain.Entities
         public DateTimeOffset DateOn { get; set; }
 
         #region Links
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int UserId { get; set; }
         #endregion
     }

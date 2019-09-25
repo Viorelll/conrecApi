@@ -23,12 +23,48 @@ namespace Conrec.Persistence
             }
 
             SeedCountries(context);
+            SeedRegions(context);
             SeedSalaryPayments(context);
             SeedUserRoles(context);
             SeedJobRoles(context);
             SeedSkills(context);
             SeedWorkDays(context);
             SeedCurrencies(context);
+            SeedPaymentFrequency(context);
+            SeedPaymentType(context);
+        }
+
+        private void SeedPaymentType(ConrecDbContext context)
+        {
+            var paymentTypes = new[]
+            {
+                new Currency {Name = "Hour", Description = "Pay per hour"},
+                new Currency {Name = "Area", Description = "Pay per square meter"},
+            };
+            context.AddRange(paymentTypes);
+            context.SaveChanges();
+        }
+
+        private void SeedPaymentFrequency(ConrecDbContext context)
+        {
+            var paymentFrequency = new[]
+            {
+                new Currency {Name = "Day", Description = "Pay per day"},
+                new Currency {Name = "Week", Description = "Pay per week"},
+            };
+            context.AddRange(paymentFrequency);
+            context.SaveChanges();
+        }
+
+        private void SeedRegions(ConrecDbContext context)
+        {
+            var regions = new[]
+            {
+                new Region {Name = "London", PostCode = "LON"},
+                new Region {Name = "Manchester", PostCode = "MAN"},
+            };
+            context.AddRange(regions);
+            context.SaveChanges();
         }
 
         private void SeedCurrencies(ConrecDbContext context)

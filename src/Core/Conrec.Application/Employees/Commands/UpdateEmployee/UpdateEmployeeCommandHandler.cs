@@ -21,7 +21,7 @@ namespace Conrec.Application.Employees.Commands.UpdateEmployee
         public async Task<Unit> Handle(UpdateEmployeeCommand request, CancellationToken cancellationToken)
         {
             var entity = await _context.Employee
-                .SingleAsync(c => c.UserId == request.Id, cancellationToken);
+                .SingleAsync(c => c.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {
@@ -37,7 +37,7 @@ namespace Conrec.Application.Employees.Commands.UpdateEmployee
             entity.TeamId = request.TeamId;
             entity.AdditionalInformationId = request.AdditionalInformationId;
             entity.Documents = request.Documents;
-            entity.Projects = request.Projects;
+            entity.ProjectEmployees = request.ProjectEmployees;
 
             _context.Employee.Update(entity);
 

@@ -12,16 +12,25 @@ namespace Conrec.Persistence.Configurations
 
             builder.Property(e => e.TotalHoursWorked);
 
-            builder.Property(e => e.BreakTime);
+            builder.Property(e => e.BreakStart);
 
-            builder.Property(e => e.StartTime);
+            builder.Property(e => e.BreakEnd);
 
-            builder.Property(e => e.EndTime);
+            builder.Property(e => e.DayStart);
+
+            builder.Property(e => e.DayEnd);
+
 
             #region Keys
 
             builder.HasKey(primaryKey => primaryKey.Id);
+
             builder.HasIndex(x => x.WorkDayId).IsUnique(false);
+
+            builder
+              .HasMany(p => p.ProjectSchedules)
+              .WithOne(ps => ps.Schedule)
+              .HasForeignKey(p => p.ScheduleId);
 
             #endregion
         }

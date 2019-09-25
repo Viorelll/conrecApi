@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Conrec.Application.Models;
+using MediatR;
 
 namespace Conrec.Application.Employees.Queries.GetEmployerDetail
 {

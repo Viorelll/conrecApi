@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using Conrec.Application.Models;
 
-namespace Conrec.Application.Employees.Queries.GetUserDetail
+namespace Conrec.Application.User.Queries.GetUserDetail
 {
     public class GetUserDetailQuery : IRequest<UserDetailModel>
     {

@@ -15,7 +15,9 @@ namespace Conrec.Domain.Entities
 
         #region Links
         public int CurrencyId { get; set; }
-        public Currency Currency { get; set; }
+        public int PaymentFrequencyId { get; set; }
+        public int PaymentTypeId { get; set; }
+        public virtual ProjectPayment ProjectPayment { get; set; }
         #endregion
     }
 }

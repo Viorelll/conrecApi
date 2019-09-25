@@ -13,8 +13,8 @@ namespace Conrec.Domain.Entities
         #region Links
         public int LeaderId { get; set; }
         public int SalaryPaymentId { get; set; }
-        public SalaryPayment SalaryPayment { get; set; }
-        public ICollection<Employee> Members { get; private set; }
+        public virtual SalaryPayment SalaryPayment { get; set; }
+        public virtual ICollection<Employee> Members { get; private set; }
         #endregion
     }
 }

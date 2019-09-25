@@ -3,13 +3,13 @@
     public class Employer
     {
         public int Id { get; set; }
+
         #region Links
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
         public int JobRoleId { get; set; }
-        public JobRole JobRole { get; set; }
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
+        public virtual JobRole JobRole { get; set; }
+        public int? CompanyId { get; set; }
+        public virtual Company Company { get; set; }
         #endregion
     }
 }

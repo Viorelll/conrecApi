@@ -1,10 +1,10 @@
-﻿using Conrec.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 
 namespace Conrec.Application.Employees.Commands.UpdateEmployee
 {
+    using Conrec.Domain.Entities;
     public class UpdateEmployeeCommand : IRequest
     {
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace Conrec.Application.Employees.Commands.UpdateEmployee
         public int SkillId { get; set; }
         public int? TeamId { get; set; }
         public int? AdditionalInformationId { get; set; }
-        public ICollection<Project> Projects { get; set; }
+        public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
         public ICollection<Document> Documents { get; set; }
     }
 }

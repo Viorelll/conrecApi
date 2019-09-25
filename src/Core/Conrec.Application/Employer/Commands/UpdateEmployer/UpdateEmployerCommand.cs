@@ -1,8 +1,8 @@
-﻿using Conrec.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 
 namespace Conrec.Application.Employees.Commands.UpdateEmployer
 {
+    using Conrec.Domain.Entities;
     public class UpdateEmployerCommand : IRequest
     {
         public int Id { get; set; }

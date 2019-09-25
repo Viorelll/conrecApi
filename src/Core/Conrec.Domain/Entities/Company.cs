@@ -13,8 +13,8 @@ namespace Conrec.Domain.Entities
         public long Reference { get; set; }
 
         #region Links
-        public Employer Employer { get; set; }
-        public ICollection<Project> Projects { get; private set; }
+        public virtual Employer Employer { get; set; }
+        public virtual ICollection<Project> Projects { get; set; }
         #endregion
     }
 }

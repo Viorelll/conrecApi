@@ -4,17 +4,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Conrec.Persistence.Configurations
 {
-    public class RateConfiguration : IEntityTypeConfiguration<Rate>
+    public class ProjectScheduleConfiguration : IEntityTypeConfiguration<ProjectSchedule>
     {
-        public void Configure(EntityTypeBuilder<Rate> builder)
+        public void Configure(EntityTypeBuilder<ProjectSchedule> builder)
         {
-            builder.Property(e => e.Rating);
+            builder.Property(e => e.EffectiveFrom);
+
+            builder.Property(e => e.EffectiveTo);
 
             #region Keys
 
             builder.HasKey(primaryKey => primaryKey.Id);
 
             #endregion
+
         }
     }
 }

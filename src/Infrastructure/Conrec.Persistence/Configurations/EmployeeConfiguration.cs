@@ -18,6 +18,8 @@ namespace Conrec.Persistence.Configurations
 
             #region Keys
 
+            builder.Property(primaryKey => primaryKey.Id);
+
             builder
                .HasOne(e => e.Country)
                .WithOne(c => c.Employee)
@@ -37,9 +39,9 @@ namespace Conrec.Persistence.Configurations
             builder.HasIndex(x => x.AdditionalInformationId).IsUnique(false);
 
             builder
-               .HasMany(e => e.Projects)
+               .HasMany(e => e.ProjectEmployees)
                .WithOne(p => p.Employee)
-               .HasForeignKey(p => p.UserId);
+               .HasForeignKey(p => p.EmployeeId);
 
             #endregion
         }

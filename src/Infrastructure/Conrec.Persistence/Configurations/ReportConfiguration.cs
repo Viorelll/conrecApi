@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Conrec.Persistence.Configurations
 {
-    public class PerformanceConfiguration : IEntityTypeConfiguration<Performance>
+    public class ReportConfiguration : IEntityTypeConfiguration<Report>
     {
-        public void Configure(EntityTypeBuilder<Performance> builder)
+        public void Configure(EntityTypeBuilder<Report> builder)
         {
             builder.Property(e => e.Absences);
 

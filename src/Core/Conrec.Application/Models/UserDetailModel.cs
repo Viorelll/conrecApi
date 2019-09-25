@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Conrec.Domain.Entities;
 
-namespace Conrec.Application.Employees.Queries.GetUserDetail
+namespace Conrec.Application.Models
 {
+    using Conrec.Domain.Entities;
     public class UserDetailModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
         public DateTimeOffset? RegisterDate { get; set; }
         public int UserRolesId { get; set; }
@@ -27,6 +28,7 @@ namespace Conrec.Application.Employees.Queries.GetUserDetail
                     Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
+                    Password = user.Password,
                     Email = user.Email,
                     RegisterDate = user.RegisterDate,
                     UserRolesId = user.UserRolesId,

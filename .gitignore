@@ -1,0 +1,26 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+bin/
+
+/.vs/Conrec/v16/Server/sqlite3
+/src/Cammon/Conrec.Helper/obj/Debug/netstandard2.0
+/src/Cammon/Conrec.Helper/obj/Debug/netstandard2.1
+/src/Cammon/Conrec.Helper/obj/Release/netstandard2.1
+/src/Cammon/Conrec.Helper/obj
+/src/Core/Conrec.Application/obj/Release/netstandard2.1
+/src/Infrastructure/Conrec.Cryptography/obj/Debug/netstandard2.0
+/src/Infrastructure/Conrec.Cryptography/obj/Debug/netstandard2.1
+/src/Infrastructure/Conrec.Cryptography/obj/Release/netstandard2.0
+/src/Infrastructure/Conrec.Cryptography/obj/Release/netstandard2.1
+/src/Infrastructure/Conrec.Cryptography/obj
+/src/Infrastructure/Conrec.Infrastructure/obj/Debug/netstandard2.1
+/src/Infrastructure/Conrec.Infrastructure/obj/Release/netstandard2.1
+/src/Infrastructure/Conrec.Persistence/obj/Debug/netstandard2.1
+/src/Presentation/Conrec.WebApi/obj/Debug/netcoreapp3.0
+/src/Core/Conrec.Application/obj
+/src/Core/Conrec.Domain/obj
+/src/Infrastructure/Conrec.Infrastructure/obj
+/src/Infrastructure/Conrec.Persistence/obj
+/src/Presentation/Conrec.WebApi/obj

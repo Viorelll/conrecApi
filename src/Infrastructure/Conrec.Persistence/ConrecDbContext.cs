@@ -21,9 +21,11 @@ namespace Conrec.Persistence
         public DbSet<Document> Document { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<Payment> Payment { get; set; }
-        public DbSet<Performance> Performance { get; set; }
+        public DbSet<Report> Report { get; set; }
+        public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Project> Project { get; set; }
-        public DbSet<Rate> Rate { get; set; }
+        public DbSet<ProjectEmployee> ProjectEmployee { get; set; }
+        public DbSet<ProjectSchedule> ProjectSchedule { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Team> Team { get; set; }
@@ -41,11 +43,12 @@ namespace Conrec.Persistence
         public DbSet<SalaryPayment> SalaryPayment { get; set; }
         public DbSet<Skill> Skill { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
+        public DbSet<PaymentType> PaymentType { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server =.; Database = Conrec; Trusted_Connection = True; Application Name = Conrec;");
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,6 +62,8 @@ namespace Conrec.Persistence
             modelBuilder.Entity<SalaryPayment>().ToTable("ref_SalaryPayment");
             modelBuilder.Entity<Skill>().ToTable("ref_Skill");
             modelBuilder.Entity<UserRole>().ToTable("ref_UserRole");
+            modelBuilder.Entity<PaymentType>().ToTable("ref_PaymentType");
+
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ConrecDbContext).Assembly);
         }

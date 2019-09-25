@@ -16,6 +16,7 @@ namespace Conrec.Persistence.Configurations
                 .HasMany(t => t.Members)
                 .WithOne(m => m.Team)
                 .HasForeignKey(fr => fr.TeamId);
+
             builder.HasIndex(x => x.SalaryPaymentId).IsUnique(false);
 
             #endregion
