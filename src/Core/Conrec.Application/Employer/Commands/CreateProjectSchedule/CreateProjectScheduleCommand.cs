@@ -4,7 +4,7 @@ using System;
 
 namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
 {
-    public class CreateProjectScheduleCommand : IRequest
+    public class CreateProjectPaymentCommand : IRequest
     {
         public int ProjectId { get; set; }
         public int EmployeeId { get; set; }

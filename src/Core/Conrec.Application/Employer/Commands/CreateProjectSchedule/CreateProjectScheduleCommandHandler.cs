@@ -10,15 +10,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
 {
-    public class CreateProjectScheduleCommandHandler : IRequestHandler<CreateProjectScheduleCommand, Unit>
+    public class CreateProjectPaymentCommandHandler : IRequestHandler<CreateProjectPaymentCommand, Unit>
     {
         private readonly ConrecDbContext _context;
 
-        public CreateProjectScheduleCommandHandler(ConrecDbContext context)
+        public CreateProjectPaymentCommandHandler(ConrecDbContext context)
         {
             _context = context;
         }
-        public async Task<Unit> Handle(CreateProjectScheduleCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProjectPaymentCommand request, CancellationToken cancellationToken)
         {
             var projectEmployee = await _context.ProjectEmployee
                 .Where(x => x.ProjectId == request.ProjectId && x.EmployeeId == request.EmployeeId)

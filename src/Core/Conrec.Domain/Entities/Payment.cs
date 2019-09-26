@@ -9,7 +9,8 @@ namespace Conrec.Domain.Entities
         public string ShortCode { get; set; }
         public string Subject { get; set; }
         public double Amount { get; set; }
-        public double PayRate { get; set; }
+        public double OriginalPayRate { get; set; }
+        public double AdjustedPayRate { get; set; }
         public double WorkedHours { get; set; }
         public DateTimeOffset PaymentDate { get; set; }
 

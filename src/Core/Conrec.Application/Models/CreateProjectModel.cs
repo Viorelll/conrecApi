@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Conrec.Application.Employer.Commands.CreateProject
+namespace Conrec.Application.Models
 {
     public class CreateProjectModel
     {

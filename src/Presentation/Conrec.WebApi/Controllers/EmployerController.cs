@@ -79,7 +79,7 @@ namespace Conrec.WebApi.Controllers
 
         [HttpPost]
         [Route("createProjectSchedule")]
-        public async Task<IActionResult> PostCreateProjectSchedule(CreateProjectScheduleCommand createProjecScheduleCommand)
+        public async Task<IActionResult> PostCreateProjectSchedule(CreateProjectPaymentCommand createProjecScheduleCommand)
         {
             await Mediator.Send(createProjecScheduleCommand);
 
