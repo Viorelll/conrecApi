@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
 {
-    public class CreateProjectPaymentCommandHandler : IRequestHandler<CreateProjectPaymentCommand, Unit>
+    public class CreateProjectPaymentCommandHandler : IRequestHandler<CreateProjectScheduleCommand, Unit>
     {
         private readonly ConrecDbContext _context;
 
@@ -18,7 +18,7 @@ namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
         {
             _context = context;
         }
-        public async Task<Unit> Handle(CreateProjectPaymentCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProjectScheduleCommand request, CancellationToken cancellationToken)
         {
             var projectEmployee = await _context.ProjectEmployee
                 .Where(x => x.ProjectId == request.ProjectId && x.EmployeeId == request.EmployeeId)

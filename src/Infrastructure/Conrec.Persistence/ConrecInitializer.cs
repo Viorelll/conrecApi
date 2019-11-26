@@ -38,8 +38,8 @@ namespace Conrec.Persistence
         {
             var paymentTypes = new[]
             {
-                new Currency {Name = "Hour", Description = "Pay per hour"},
-                new Currency {Name = "Area", Description = "Pay per square meter"},
+                new PaymentType {Name = "Hour", Description = "Pay per hour"},
+                new PaymentType {Name = "Area", Description = "Pay per square meter"},
             };
             context.AddRange(paymentTypes);
             context.SaveChanges();
@@ -49,8 +49,8 @@ namespace Conrec.Persistence
         {
             var paymentFrequency = new[]
             {
-                new Currency {Name = "Day", Description = "Pay per day"},
-                new Currency {Name = "Week", Description = "Pay per week"},
+                new PaymentFrequency {Name = "Day", Description = "Pay per day"},
+                new PaymentFrequency {Name = "Week", Description = "Pay per week"},
             };
             context.AddRange(paymentFrequency);
             context.SaveChanges();

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Conrec.Application.Employees.Commands.CreateProjectFeedback
 {
-    public class CreateProjectFeedbackCommandHandler : IRequestHandler<CreateProjectFeedbackCommand, Unit>
+    public class CreateProjectPaymentCommandHandler : IRequestHandler<CreateProjectPaymentCommand, Unit>
     {
         private readonly ConrecDbContext _context;
 
-        public CreateProjectFeedbackCommandHandler(ConrecDbContext context)
+        public CreateProjectPaymentCommandHandler(ConrecDbContext context)
         {
             _context = context;
         }
-        public async Task<Unit> Handle(CreateProjectFeedbackCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProjectPaymentCommand request, CancellationToken cancellationToken)
         {
             var employee = await _context.Employee.FindAsync(request.EmployeeId);
 
@@ -27,7 +27,7 @@ namespace Conrec.Application.Employees.Commands.CreateProjectFeedback
 
             if (request.ProjectFeedback == null)
             {
-                throw new Exception(nameof(CreateProjectFeedbackCommand) + request.EmployeeId);
+                throw new Exception(nameof(CreateProjectPaymentCommand) + request.EmployeeId);
             }
 
             var projectFeedback = new Feedback

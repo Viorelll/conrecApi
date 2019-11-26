@@ -1,6 +1,6 @@
 ﻿namespace Conrec.Application.Employees.Commands.CreateProjectFeedback
 {
-    public class CreateProjectFeedbackModel
+    public class CreateProjectPaymentModel
     {
         public int SpecificationClarity { get; set; }
         public int Communication { get; set; }

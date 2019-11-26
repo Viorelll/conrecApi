@@ -2,10 +2,10 @@
 
 namespace Conrec.Application.Employees.Commands.CreateProjectFeedback
 {
-    public class CreateProjectFeedbackCommand : IRequest
+    public class CreateProjectPaymentCommand : IRequest
     {
         public int EmployeeId { get; set; }
         public int ProjectId { get; set; }
-        public CreateProjectFeedbackModel ProjectFeedback { get; set; }
+        public CreateProjectPaymentModel ProjectFeedback { get; set; }
     }
 }

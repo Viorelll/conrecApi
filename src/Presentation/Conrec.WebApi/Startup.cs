@@ -71,6 +71,17 @@ namespace Conrec.WebApi
                 app.UseHsts();
             }
 
+            // app.UseHttpsRedirection();
+            // app.UseAuthorization();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            //-----------------
+
             // Register the Swagger generator and the Swagger UI middlewares
             app.UseOpenApi();
 

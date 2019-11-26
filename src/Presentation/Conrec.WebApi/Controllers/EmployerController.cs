@@ -9,6 +9,7 @@ using Conrec.Application.User.Queries.GetUserValidation;
 using Conrec.Application.Employer.Commands.CreateProject;
 using Conrec.Application.Employer.Commands.CreateProjectReport;
 using Conrec.Application.Employer.Commands.CreateProjectSchedule;
+using Conrec.Application.Employer.Commands.CreateProjectEmployeePayment;
 
 namespace Conrec.WebApi.Controllers
 {
@@ -79,9 +80,18 @@ namespace Conrec.WebApi.Controllers
 
         [HttpPost]
         [Route("createProjectSchedule")]
-        public async Task<IActionResult> PostCreateProjectSchedule(CreateProjectPaymentCommand createProjecScheduleCommand)
+        public async Task<IActionResult> PostCreateProjectSchedule(CreateProjectScheduleCommand createProjecScheduleCommand)
         {
             await Mediator.Send(createProjecScheduleCommand);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("createProjectPayment")]
+        public async Task<IActionResult> PostCreateProjectEmployeePayment(CreateProjectEmployeePaymentCommand createProjectEmployeePaymentCommand)
+        {
+            await Mediator.Send(createProjectEmployeePaymentCommand);
 
             return NoContent();
         }

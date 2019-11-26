@@ -26,11 +26,6 @@ namespace Conrec.Persistence.Configurations
                .WithOne(ps => ps.ProjectEmployee)
                .HasForeignKey(ps => ps.ProjectEmployeeId);
 
-            builder
-               .HasOne(pe => pe.ProjectPayment)
-               .WithOne(ps => ps.ProjectEmployee)
-               .HasForeignKey<ProjectPayment>(pp => pp.ProjectPaymentId);
-
             #endregion
 
         }

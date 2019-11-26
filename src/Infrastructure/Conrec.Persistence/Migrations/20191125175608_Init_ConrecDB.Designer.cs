@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conrec.Persistence.Migrations
 {
     [DbContext(typeof(ConrecDbContext))]
-    [Migration("20190925081718_Init_ConrecDB")]
+    [Migration("20191125175608_Init_ConrecDB")]
     partial class Init_ConrecDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -338,13 +338,16 @@ namespace Conrec.Persistence.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<double>("AdjustedPayRate")
+                        .HasColumnType("float");
+
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
 
-                    b.Property<double>("PayRate")
+                    b.Property<double>("OriginalPayRate")
                         .HasColumnType("float");
 
                     b.Property<DateTimeOffset>("PaymentDate")
@@ -510,7 +513,7 @@ namespace Conrec.Persistence.Migrations
                     b.ToTable("ProjectEmployee");
                 });
 
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeePayment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -526,22 +529,19 @@ namespace Conrec.Persistence.Migrations
                     b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProjectPaymentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PaymentId")
                         .IsUnique()
                         .HasFilter("[PaymentId] IS NOT NULL");
 
+                    b.HasIndex("ProjectEmployeeId")
+                        .IsUnique()
+                        .HasFilter("[ProjectEmployeeId] IS NOT NULL");
+
                     b.HasIndex("ProjectId");
 
-                    b.HasIndex("ProjectPaymentId")
-                        .IsUnique()
-                        .HasFilter("[ProjectPaymentId] IS NOT NULL");
-
-                    b.ToTable("ProjectPayment");
+                    b.ToTable("ProjectEmployeePayment");
                 });
 
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
@@ -961,19 +961,19 @@ namespace Conrec.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeePayment", b =>
                 {
                     b.HasOne("Conrec.Domain.Entities.Payment", "Payment")
-                        .WithOne("ProjectPayment")
-                        .HasForeignKey("Conrec.Domain.Entities.ProjectPayment", "PaymentId");
-
-                    b.HasOne("Conrec.Domain.Entities.Project", "Project")
-                        .WithMany("ProjectPayments")
-                        .HasForeignKey("ProjectId");
+                        .WithOne("ProjectEmployeePayment")
+                        .HasForeignKey("Conrec.Domain.Entities.ProjectEmployeePayment", "PaymentId");
 
                     b.HasOne("Conrec.Domain.Entities.ProjectEmployee", "ProjectEmployee")
-                        .WithOne("ProjectPayment")
-                        .HasForeignKey("Conrec.Domain.Entities.ProjectPayment", "ProjectPaymentId");
+                        .WithOne("ProjectEmployeePayment")
+                        .HasForeignKey("Conrec.Domain.Entities.ProjectEmployeePayment", "ProjectEmployeeId");
+
+                    b.HasOne("Conrec.Domain.Entities.Project", "Project")
+                        .WithMany("ProjectEmployeePayments")
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>

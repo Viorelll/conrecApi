@@ -20,7 +20,7 @@ namespace Conrec.Domain.Entities
         public virtual Project Project { get; set; }
         public virtual ICollection<Report> ProjectReports { get; set; }
         public virtual Feedback ProjectFeedback { get; set; }
-        public virtual ProjectPayment ProjectPayment { get; set; }
+        public virtual ProjectEmployeePayment ProjectEmployeePayment { get; set; }
 
         //public int? ScheduleId { get; set; }
         public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }

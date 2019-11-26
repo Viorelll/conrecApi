@@ -98,7 +98,7 @@ namespace Conrec.WebApi.Controllers
 
         [HttpPost]
         [Route("createProjectFeedback")]
-        public async Task<IActionResult> PostCreateProjectFeedback(CreateProjectFeedbackCommand createProjectFeedback)
+        public async Task<IActionResult> PostCreateProjectFeedback(CreateProjectPaymentCommand createProjectFeedback)
         {
             await Mediator.Send(createProjectFeedback);
 

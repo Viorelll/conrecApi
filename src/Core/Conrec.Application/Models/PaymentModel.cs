@@ -11,5 +11,8 @@ namespace Conrec.Application.Models
         public double OriginalPayRate { get; set; }
         public double WorkedHours { get; set; }
         public DateTimeOffset PaymentDate { get; set; }
+        public int CurrencyId { get; set; }
+        public int PaymentFrequencyId { get; set; }
+        public int PaymentTypeId { get; set; }
     }
 }

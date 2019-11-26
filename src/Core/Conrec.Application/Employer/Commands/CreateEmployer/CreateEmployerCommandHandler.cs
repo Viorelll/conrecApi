@@ -70,11 +70,13 @@ namespace Conrec.Application.Employees.Commands.CreateEmployer
         private void AttachRegion(User user, CreateEmployerCommand request, CancellationToken cancellationToken)
         {
             var regionRequestPostCode = request.Employer.Region?.PostCode;
-            var searchRegionResponse = SerachRegion(regionRequestPostCode);
-            var regionName = searchRegionResponse.addresses[0]
-                        .Split(',')
-                        .Where(x => !string.IsNullOrWhiteSpace(x))
-                        .LastOrDefault();
+            //var searchRegionResponse = SerachRegion(regionRequestPostCode);
+            //var regionName = searchRegionResponse.addresses[0]
+            //            .Split(',')
+            //            .Where(x => !string.IsNullOrWhiteSpace(x))
+            //            .LastOrDefault();
+
+            var regionName = "London";
 
             if (string.IsNullOrWhiteSpace(regionName))
             {
