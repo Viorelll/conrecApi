@@ -242,6 +242,7 @@ namespace Conrec.Persistence.Migrations
                     Subject = table.Column<string>(maxLength: 100, nullable: true),
                     Amount = table.Column<double>(nullable: false),
                     OriginalPayRate = table.Column<double>(nullable: false),
+                    CoefficientPayRate = table.Column<double>(nullable: false),
                     AdjustedPayRate = table.Column<double>(nullable: false),
                     WorkedHours = table.Column<double>(nullable: false),
                     PaymentDate = table.Column<DateTimeOffset>(nullable: false),
@@ -346,6 +347,32 @@ namespace Conrec.Persistence.Migrations
                         principalTable: "ref_UserRole",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectPayment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProjectId = table.Column<int>(nullable: true),
+                    PaymentId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectPayment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectPayment_Payment_PaymentId",
+                        column: x => x.PaymentId,
+                        principalTable: "Payment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProjectPayment_Project_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Project",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -572,39 +599,6 @@ namespace Conrec.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectEmployeePayment",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectId = table.Column<int>(nullable: true),
-                    PaymentId = table.Column<int>(nullable: true),
-                    ProjectEmployeeId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProjectEmployeePayment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProjectEmployeePayment_Payment_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payment",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProjectEmployeePayment_ProjectEmployee_ProjectEmployeeId",
-                        column: x => x.ProjectEmployeeId,
-                        principalTable: "ProjectEmployee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ProjectEmployeePayment_Project_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Project",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProjectSchedule",
                 columns: table => new
                 {
@@ -759,22 +753,15 @@ namespace Conrec.Persistence.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectEmployeePayment_PaymentId",
-                table: "ProjectEmployeePayment",
+                name: "IX_ProjectPayment_PaymentId",
+                table: "ProjectPayment",
                 column: "PaymentId",
                 unique: true,
                 filter: "[PaymentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectEmployeePayment_ProjectEmployeeId",
-                table: "ProjectEmployeePayment",
-                column: "ProjectEmployeeId",
-                unique: true,
-                filter: "[ProjectEmployeeId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProjectEmployeePayment_ProjectId",
-                table: "ProjectEmployeePayment",
+                name: "IX_ProjectPayment_ProjectId",
+                table: "ProjectPayment",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
@@ -839,7 +826,7 @@ namespace Conrec.Persistence.Migrations
                 name: "Notification");
 
             migrationBuilder.DropTable(
-                name: "ProjectEmployeePayment");
+                name: "ProjectPayment");
 
             migrationBuilder.DropTable(
                 name: "ProjectSchedule");

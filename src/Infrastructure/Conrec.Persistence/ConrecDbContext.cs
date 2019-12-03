@@ -26,7 +26,7 @@ namespace Conrec.Persistence
         public DbSet<Project> Project { get; set; }
         public DbSet<ProjectEmployee> ProjectEmployee { get; set; }
         public DbSet<ProjectSchedule> ProjectSchedule { get; set; }
-        public DbSet<ProjectEmployeePayment> ProjectEmployeePayment { get; set; }
+        public DbSet<ProjectPayment> ProjectPayment { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Team> Team { get; set; }

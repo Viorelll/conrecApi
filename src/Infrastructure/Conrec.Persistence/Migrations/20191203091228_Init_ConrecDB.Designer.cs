@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conrec.Persistence.Migrations
 {
     [DbContext(typeof(ConrecDbContext))]
-    [Migration("20191125175608_Init_ConrecDB")]
+    [Migration("20191203091228_Init_ConrecDB")]
     partial class Init_ConrecDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -344,6 +344,9 @@ namespace Conrec.Persistence.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
+                    b.Property<double>("CoefficientPayRate")
+                        .HasColumnType("float");
+
                     b.Property<int>("CurrencyId")
                         .HasColumnType("int");
 
@@ -513,7 +516,7 @@ namespace Conrec.Persistence.Migrations
                     b.ToTable("ProjectEmployee");
                 });
 
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeePayment", b =>
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -521,9 +524,6 @@ namespace Conrec.Persistence.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectEmployeeId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProjectId")
@@ -535,13 +535,9 @@ namespace Conrec.Persistence.Migrations
                         .IsUnique()
                         .HasFilter("[PaymentId] IS NOT NULL");
 
-                    b.HasIndex("ProjectEmployeeId")
-                        .IsUnique()
-                        .HasFilter("[ProjectEmployeeId] IS NOT NULL");
-
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectEmployeePayment");
+                    b.ToTable("ProjectPayment");
                 });
 
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
@@ -961,15 +957,11 @@ namespace Conrec.Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeePayment", b =>
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
                 {
                     b.HasOne("Conrec.Domain.Entities.Payment", "Payment")
-                        .WithOne("ProjectEmployeePayment")
-                        .HasForeignKey("Conrec.Domain.Entities.ProjectEmployeePayment", "PaymentId");
-
-                    b.HasOne("Conrec.Domain.Entities.ProjectEmployee", "ProjectEmployee")
-                        .WithOne("ProjectEmployeePayment")
-                        .HasForeignKey("Conrec.Domain.Entities.ProjectEmployeePayment", "ProjectEmployeeId");
+                        .WithOne("ProjectPayment")
+                        .HasForeignKey("Conrec.Domain.Entities.ProjectPayment", "PaymentId");
 
                     b.HasOne("Conrec.Domain.Entities.Project", "Project")
                         .WithMany("ProjectEmployeePayments")

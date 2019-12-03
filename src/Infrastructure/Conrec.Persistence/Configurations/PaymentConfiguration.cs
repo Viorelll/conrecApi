@@ -18,6 +18,8 @@ namespace Conrec.Persistence.Configurations
 
             builder.Property(e => e.OriginalPayRate);
 
+            builder.Property(e => e.CoefficientPayRate);
+
             builder.Property(e => e.AdjustedPayRate);
 
             builder.Property(e => e.WorkedHours);

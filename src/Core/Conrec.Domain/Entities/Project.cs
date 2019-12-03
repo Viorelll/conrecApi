@@ -26,7 +26,7 @@ namespace Conrec.Domain.Entities
         public virtual Company Company { get; set; }
         public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
         public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }
-        public virtual ICollection<ProjectEmployeePayment> ProjectEmployeePayments { get; set; }
+        public virtual ICollection<ProjectPayment> ProjectEmployeePayments { get; set; }
 
         #endregion
     }

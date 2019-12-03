@@ -10,6 +10,7 @@ namespace Conrec.Domain.Entities
         public string Subject { get; set; }
         public double Amount { get; set; }
         public double OriginalPayRate { get; set; }
+        public double CoefficientPayRate { get; set; }
         public double AdjustedPayRate { get; set; }
         public double WorkedHours { get; set; }
         public DateTimeOffset PaymentDate { get; set; }
@@ -18,7 +19,7 @@ namespace Conrec.Domain.Entities
         public int CurrencyId { get; set; }
         public int PaymentFrequencyId { get; set; }
         public int PaymentTypeId { get; set; }
-        public virtual ProjectEmployeePayment ProjectEmployeePayment { get; set; }
+        public virtual ProjectPayment ProjectPayment { get; set; }
         #endregion
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Conrec.Persistence.Configurations
 {
-    public class ProjectPaymentConfiguration : IEntityTypeConfiguration<ProjectEmployeePayment>
+    public class ProjectPaymentConfiguration : IEntityTypeConfiguration<ProjectPayment>
     {
-        public void Configure(EntityTypeBuilder<ProjectEmployeePayment> builder)
+        public void Configure(EntityTypeBuilder<ProjectPayment> builder)
         {
 
             #region Keys
@@ -15,8 +15,8 @@ namespace Conrec.Persistence.Configurations
 
             builder
               .HasOne(pp => pp.Payment)
-              .WithOne(p => p.ProjectEmployeePayment)
-              .HasForeignKey<ProjectEmployeePayment>(p => p.PaymentId);
+              .WithOne(p => p.ProjectPayment)
+              .HasForeignKey<ProjectPayment>(p => p.PaymentId);
 
             #endregion
 
