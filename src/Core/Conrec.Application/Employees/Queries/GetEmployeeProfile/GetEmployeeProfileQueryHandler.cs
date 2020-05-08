@@ -5,18 +5,18 @@ using MediatR;
 using Conrec.Domain.Entities;
 using Conrec.Persistence;
 
-namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
+namespace Conrec.Application.Employees.Queries.GetEmployeeProfile
 {
-    public class GetEmployeeDetailQueryHandler : IRequestHandler<GetEmployeeDetailQuery, EmployeeDetailsModel>
+    public class GetAttachmentsAndAdditionalInfoQueryHandler : IRequestHandler<GetEmployeeProfileQuery, EmployeeProfileModel>
     {
         private readonly ConrecDbContext _context;
 
-        public GetEmployeeDetailQueryHandler(ConrecDbContext context)
+        public GetAttachmentsAndAdditionalInfoQueryHandler(ConrecDbContext context)
         {
             _context = context;
         }
 
-        public async Task<EmployeeDetailsModel> Handle(GetEmployeeDetailQuery request, CancellationToken cancellationToken)
+        public async Task<EmployeeProfileModel> Handle(GetEmployeeProfileQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Employee
                 .FindAsync(request.Id);
@@ -26,7 +26,7 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
                 throw new Exception(nameof(Employee) + request.Id);
             }
 
-            var result = EmployeeDetailsModel.Create(entity);
+            var result = EmployeeProfileModel.Create(entity);
 
             return result;
         }

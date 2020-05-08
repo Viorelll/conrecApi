@@ -16,7 +16,7 @@ namespace Conrec.Domain.Entities
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateTimeOffset? RegisterDate { get; set; }
+        public DateTimeOffset RegisterDate { get; set; }
 
         #region Links
         public virtual Employee Employee { get; set; }

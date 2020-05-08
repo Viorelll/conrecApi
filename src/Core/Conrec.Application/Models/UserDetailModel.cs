@@ -12,7 +12,7 @@ namespace Conrec.Application.Models
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateTimeOffset? RegisterDate { get; set; }
+        public DateTimeOffset RegisterDate { get; set; }
         public int UserRolesId { get; set; }
         public int RegionId { get; set; }
         public ICollection<Contact> Contacts { get; private set; }

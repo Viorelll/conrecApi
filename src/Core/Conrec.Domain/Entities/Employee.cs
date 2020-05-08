@@ -14,7 +14,7 @@ namespace Conrec.Domain.Entities
         public string NINO { get; set; }
         public int Experience { get; set; }
         public bool AvailabilWorkImmediate { get; set; }
-        public DateTimeOffset? AvailabilStartsOn { get; set; }
+        public DateTimeOffset AvailabilStartsOn { get; set; }
 
         #region Links
         public virtual User User { get; set; }

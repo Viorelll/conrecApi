@@ -78,7 +78,7 @@ namespace Conrec.Application.Employees.Commands.CreateEmployee
 
         private string CreatePasswordSalt(UserDetailModel user)
         {
-            return user.Email.GetHashCode().ToString() + user.RegisterDate.Value.DateTime.ToString();
+            return user.Email.GetHashCode().ToString() + user.RegisterDate.DateTime.ToString();
         }
     }
 }

@@ -38,6 +38,8 @@ namespace Conrec.Application.Employees.Commands.CreateTeam
                 SalaryPaymentId = request.Team.SalaryPaymentId
             };
 
+            employee.Team = team;
+
             // save team
              _context.Team.Add(team);
 

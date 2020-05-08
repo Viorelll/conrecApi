@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Conrec.Application.Models
 {
-    using Conrec.Application.Employer.Commands.CreateProject;
     using Conrec.Domain.Entities;
     public class EmployerDetailModel
     {

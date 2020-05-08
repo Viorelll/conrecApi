@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
 {
-    public class EmployeeDetailModel
+    public class EmployeeDetailsModel
     {
         public int Id { get; set; }
         public string NINO { get; set; }
@@ -21,11 +21,11 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
         public ICollection<ProjectEmployeeModel> Projects { get; set; }
         public ICollection<Document> Documents { get; set; }
 
-        public static Expression<Func<Employee, EmployeeDetailModel>> Projection
+        public static Expression<Func<Employee, EmployeeDetailsModel>> Projection
         {
             get
             {
-                return employee => new EmployeeDetailModel
+                return employee => new EmployeeDetailsModel
                 {
                     Id = employee.Id,
                     NINO = employee.NINO,
@@ -48,7 +48,7 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeDetail
             }
         }
 
-        public static EmployeeDetailModel Create(Employee employee)
+        public static EmployeeDetailsModel Create(Employee employee)
         {
             return Projection.Compile().Invoke(employee);
         }

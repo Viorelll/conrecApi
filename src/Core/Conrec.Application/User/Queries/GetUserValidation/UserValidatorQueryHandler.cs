@@ -43,7 +43,7 @@ namespace Conrec.Application.User.Queries.GetUserValidation
 
         private string CreatePasswordSalt(User user)
         {
-            return user.Id.ToString() + user.RegisterDate.Value.DateTime.ToString();
+            return user.Id.ToString() + user.RegisterDate.DateTime.ToString();
         }
     }
 }

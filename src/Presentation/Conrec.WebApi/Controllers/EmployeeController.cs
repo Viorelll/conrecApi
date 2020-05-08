@@ -4,12 +4,18 @@ using System.Threading.Tasks;
 using Conrec.Application.Employees.Commands.CreateEmployee;
 using Conrec.Application.Employees.Commands.DeleteEmployee;
 using Conrec.Application.Employees.Commands.UpdateEmployee;
-using Conrec.Application.Employees.Queries.GetEmployeeDetail;
 using Conrec.Application.Employees.Commands.CreateTeam;
 using Conrec.Application.Employees.Commands.AttachTeam;
 using Conrec.Application.Employees.Commands.CreateDocument;
 using Conrec.Application.Employees.Commands.AttachProject;
 using Conrec.Application.Employees.Commands.CreateProjectFeedback;
+using Conrec.Application.Employees.Queries.GetEmployeeDetail;
+using Conrec.Application.Employees.Queries.GetEmployeeProfile;
+using Conrec.Application.Employees.Queries.GetAttachmentsAndAdditionalInfo;
+using Conrec.Application.Employees.Queries.GetProjectDetails;
+using Conrec.Application.Employees.Queries.GetProjectSchedulePerWeek;
+using Conrec.Application.Employees.Queries.GetProjectEmployeePerformance;
+using Conrec.Application.Employees.Queries.GetPreviousProjectsAndReviews;
 
 namespace Conrec.WebApi.Controllers
 {
@@ -26,9 +32,45 @@ namespace Conrec.WebApi.Controllers
 
         // GET: api/Employee/5
         [HttpGet("{id}", Name = "GetEmployee")]
-        public async Task<ActionResult<EmployeeDetailModel>> Get(int id)
+        public async Task<ActionResult<ProjectDetailsModel>> Get(int id)
         {
-            return Json(await Mediator.Send(new GetEmployeeDetailQuery { Id = id }));
+            return Json(await Mediator.Send(new GetProjectSchedulePerWeekQuery { Id = id }));
+        }
+
+        [HttpGet("GetEmployeeProfile/{id}")]
+        public async Task<ActionResult<EmployeeProfileModel>> GetEmployeeProfile(int id)
+        {
+            return Json(await Mediator.Send(new GetEmployeeProfileQuery { Id = id }));
+        }
+
+        [HttpGet("GetAttachmentsAndAdditionalInfo/{id}")]
+        public async Task<ActionResult<AttachmentsAndAdditionalInfoModel>> GetAttachmentsAndAdditionalInfo(int id)
+        {
+            return Json(await Mediator.Send(new GetAttachmentsAndAdditionalInfoQuery { Id = id }));
+        }
+
+        [HttpGet("GetCurrentProjectDetails/{id}")]
+        public async Task<ActionResult<ProjectDetailsModel>> GetCurrentProjectDetails(int id)
+        {
+            return Json(await Mediator.Send(new GetProjectDetailsQuery { Id = id }));
+        }
+
+        [HttpGet("GetProjectSchedulePerWeek/{id}")]
+        public async Task<ActionResult<ProjectSchedulePerWeekModel>> GetProjectSchedulePerWeek(int id)
+        {
+            return Json(await Mediator.Send(new GetProjectSchedulePerWeekQuery { Id = id }));
+        }
+
+        [HttpGet("GetProjectEmployeePerformance/{id}")]
+        public async Task<ActionResult<ProjectEmployeePerformanceModel>> GetProjectEmployeePerformance(int id)
+        {
+            return Json(await Mediator.Send(new GetProjectEmployeePerformanceQuery { Id = id }));
+        }
+
+        [HttpGet("GetPreviousProjectsAndReviews/{id}")]
+        public async Task<ActionResult<PreviousProjectsAndReviewsModel>> GetPreviousProjectsAndReviews(int id)
+        {
+            return Json(await Mediator.Send(new GetPreviousProjectsAndReviewsQuery { Id = id }));
         }
 
         // POST: api/Employee

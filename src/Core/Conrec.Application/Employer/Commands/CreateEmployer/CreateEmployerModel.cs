@@ -9,7 +9,7 @@ namespace Conrec.Application.Models
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public DateTimeOffset? RegisterDate { get; set; }
+        public DateTimeOffset RegisterDate { get; set; }
         public CreateCompanyModel Company { get; set; }
         public JobRoleModel JobRole { get; set; }
         public UserRoleModel UserRole { get; set; }

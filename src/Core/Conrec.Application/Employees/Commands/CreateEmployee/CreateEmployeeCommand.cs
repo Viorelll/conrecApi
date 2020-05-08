@@ -11,7 +11,7 @@ namespace Conrec.Application.Employees.Commands.CreateEmployee
         public string NINO { get; set; }
         public int Experience { get; set; }
         public bool AvailabilWorkImmediate { get; set; }
-        public DateTimeOffset? AvailabilStartsOn { get; set; }
+        public DateTimeOffset AvailabilStartsOn { get; set; }
         public UserDetailModel User { get; set; }
         public int CountryId { get; set; }
         public int SkillId { get; set; }
