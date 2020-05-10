@@ -47,11 +47,11 @@ namespace Conrec.Application.Employer.Commands.CreateProject
             var schedule = new Schedule
             {
                 IsBreakPaid = requestSchedule.IsBreakPaid,
-                BreakStart = requestSchedule.BreakStart,
-                BreakEnd = requestSchedule.BreakEnd,
-                DayStart = requestSchedule.DayStart,
-                DayEnd = requestSchedule.DayEnd,
-                TotalHoursWorked = requestSchedule.TotalHoursWorked,
+                BreakStart = DateTime.Today.AddHours(requestSchedule.BreakStart),
+                BreakEnd = DateTime.Today.AddHours(requestSchedule.BreakEnd),
+                DayStart = DateTime.Today.AddHours(requestSchedule.DayStart),
+                DayEnd = DateTime.Today.AddHours(requestSchedule.DayEnd),
+                EstimatedWorkedHoursWeekly = requestSchedule.TotalHoursWorked,
                 WorkDay = _context.WorkDay.Find(requestSchedule.WorkDayId)
             };
 

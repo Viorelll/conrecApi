@@ -31,7 +31,9 @@ namespace Conrec.Persistence
         public DbSet<Schedule> Schedule { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<TermsAndConditions> TermsAndConditions { get; set; }
-        
+        public DbSet<ProjectEmployeeSchedule> ProjectEmployeeSchedule { get; set; }
+        public DbSet<ProjectPaymentEmployee> ProjectPaymentEmployee { get; set; }
+
         #endregion
 
         #region Ref DbSets

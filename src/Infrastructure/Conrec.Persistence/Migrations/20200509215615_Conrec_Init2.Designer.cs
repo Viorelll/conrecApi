@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Conrec.Persistence.Migrations
 {
     [DbContext(typeof(ConrecDbContext))]
-    [Migration("20191203091228_Init_ConrecDB")]
-    partial class Init_ConrecDB
+    [Migration("20200509215615_Conrec_Init2")]
+    partial class Conrec_Init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,7 +192,7 @@ namespace Conrec.Persistence.Migrations
                     b.Property<int?>("AdditionalInformationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset?>("AvailabilStartsOn")
+                    b.Property<DateTimeOffset>("AvailabilStartsOn")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("AvailabilWorkImmediate")
@@ -498,7 +498,13 @@ namespace Conrec.Persistence.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("HasCustomSchedule")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHoursConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<int>("ProjectId")
@@ -516,31 +522,7 @@ namespace Conrec.Persistence.Migrations
                     b.ToTable("ProjectEmployee");
                 });
 
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("PaymentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaymentId")
-                        .IsUnique()
-                        .HasFilter("[PaymentId] IS NOT NULL");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectPayment");
-                });
-
-            modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeeSchedule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -556,6 +538,80 @@ namespace Conrec.Persistence.Migrations
                     b.Property<int?>("ProjectEmployeeId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectEmployeeId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("ProjectEmployeeSchedule");
+                });
+
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjectPaymentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId")
+                        .IsUnique()
+                        .HasFilter("[PaymentId] IS NOT NULL");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("ProjectPayment");
+                });
+
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPaymentEmployee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjectPaymentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProjectPaymentId");
+
+                    b.ToTable("ProjectPaymentEmployee");
+                });
+
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("EffectiveFrom")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("EffectiveTo")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
@@ -563,8 +619,6 @@ namespace Conrec.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProjectEmployeeId");
 
                     b.HasIndex("ProjectId");
 
@@ -668,11 +722,11 @@ namespace Conrec.Persistence.Migrations
                     b.Property<DateTimeOffset>("DayStart")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<double>("EstimatedWorkedHoursWeekly")
+                        .HasColumnType("float");
+
                     b.Property<bool>("IsBreakPaid")
                         .HasColumnType("bit");
-
-                    b.Property<double>("TotalHoursWorked")
-                        .HasColumnType("float");
 
                     b.Property<int>("WorkDayId")
                         .HasColumnType("int");
@@ -762,7 +816,7 @@ namespace Conrec.Persistence.Migrations
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset?>("RegisterDate")
+                    b.Property<DateTimeOffset>("RegisterDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<int>("UserRolesId")
@@ -957,6 +1011,17 @@ namespace Conrec.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectEmployeeSchedule", b =>
+                {
+                    b.HasOne("Conrec.Domain.Entities.ProjectEmployee", "ProjectEmployee")
+                        .WithMany("ProjectEmployeeSchedules")
+                        .HasForeignKey("ProjectEmployeeId");
+
+                    b.HasOne("Conrec.Domain.Entities.Schedule", "Schedule")
+                        .WithMany("ProjectEmployeeSchedules")
+                        .HasForeignKey("ScheduleId");
+                });
+
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectPayment", b =>
                 {
                     b.HasOne("Conrec.Domain.Entities.Payment", "Payment")
@@ -968,12 +1033,19 @@ namespace Conrec.Persistence.Migrations
                         .HasForeignKey("ProjectId");
                 });
 
+            modelBuilder.Entity("Conrec.Domain.Entities.ProjectPaymentEmployee", b =>
+                {
+                    b.HasOne("Conrec.Domain.Entities.Employee", "Employee")
+                        .WithMany("ProjectPaymentEmployees")
+                        .HasForeignKey("EmployeeId");
+
+                    b.HasOne("Conrec.Domain.Entities.ProjectPayment", "ProjectPayment")
+                        .WithMany("ProjectPaymentEmployees")
+                        .HasForeignKey("ProjectPaymentId");
+                });
+
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
                 {
-                    b.HasOne("Conrec.Domain.Entities.ProjectEmployee", "ProjectEmployee")
-                        .WithMany("ProjectSchedules")
-                        .HasForeignKey("ProjectEmployeeId");
-
                     b.HasOne("Conrec.Domain.Entities.Project", "Project")
                         .WithMany("ProjectSchedules")
                         .HasForeignKey("ProjectId");

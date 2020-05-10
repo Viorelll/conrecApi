@@ -4,14 +4,16 @@ using Conrec.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Conrec.Persistence.Migrations
 {
     [DbContext(typeof(ConrecDbContext))]
-    partial class ConrecDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200509205755_Conrec_Init")]
+    partial class Conrec_Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -610,6 +612,9 @@ namespace Conrec.Persistence.Migrations
                     b.Property<DateTimeOffset>("EffectiveTo")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int?>("ProjectEmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProjectId")
                         .HasColumnType("int");
 
@@ -617,6 +622,8 @@ namespace Conrec.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectEmployeeId");
 
                     b.HasIndex("ProjectId");
 
@@ -1044,6 +1051,10 @@ namespace Conrec.Persistence.Migrations
 
             modelBuilder.Entity("Conrec.Domain.Entities.ProjectSchedule", b =>
                 {
+                    b.HasOne("Conrec.Domain.Entities.ProjectEmployee", "ProjectEmployee")
+                        .WithMany("ProjectSchedules")
+                        .HasForeignKey("ProjectEmployeeId");
+
                     b.HasOne("Conrec.Domain.Entities.Project", "Project")
                         .WithMany("ProjectSchedules")
                         .HasForeignKey("ProjectId");

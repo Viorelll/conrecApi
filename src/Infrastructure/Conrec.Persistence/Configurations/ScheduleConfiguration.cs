@@ -10,7 +10,7 @@ namespace Conrec.Persistence.Configurations
         {
             builder.Property(e => e.IsBreakPaid);
 
-            builder.Property(e => e.TotalHoursWorked);
+            builder.Property(e => e.EstimatedWorkedHoursWeekly);
 
             builder.Property(e => e.BreakStart);
 
@@ -20,7 +20,6 @@ namespace Conrec.Persistence.Configurations
 
             builder.Property(e => e.DayEnd);
 
-
             #region Keys
 
             builder.HasKey(primaryKey => primaryKey.Id);
@@ -29,6 +28,11 @@ namespace Conrec.Persistence.Configurations
 
             builder
               .HasMany(p => p.ProjectSchedules)
+              .WithOne(ps => ps.Schedule)
+              .HasForeignKey(p => p.ScheduleId);
+
+           builder
+              .HasMany(p => p.ProjectEmployeeSchedules)
               .WithOne(ps => ps.Schedule)
               .HasForeignKey(p => p.ScheduleId);
 

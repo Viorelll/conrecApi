@@ -31,15 +31,15 @@ namespace Conrec.Application.Employees.Queries.GetEmployeeProfile
                     FirstName = employee.User.FirstName,
                     LastName = employee.User.LastName,
                     CountryName = employee.Country.Name,
-                    RegionName = employee.User.Region.Name,
-                    PhoneNumber = string.Join(",", employee.User.Contacts.Select(x => x.PhoneNumber)),
+                    RegionName = employee.User != null ? employee.User.Region.Name  : string.Empty,
+                    PhoneNumber = employee.User.Contacts != null ? string.Join(",", employee.User.Contacts.Select(x => x.PhoneNumber)) : string.Empty,
                     SkillName = employee.Skill.Name,
                     NINO = employee.NINO,
                     Experience = employee.Experience,
                     RegisterOn = employee.User.RegisterDate,
                     AvailabilWorkImmediate = employee.AvailabilWorkImmediate,
                     AvailabilStartsOn = employee.AvailabilStartsOn,
-                    TeamId = employee != null ? employee.Team.Id : 0
+                    TeamId = employee.Team != null ? employee.Team.Id : 0
                 };
             }
         }

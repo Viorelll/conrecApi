@@ -47,9 +47,7 @@ namespace Conrec.Application.Employees.Commands.AttachProject
                 TotalTimeWork = request.TotalTimeWork
             };
 
-            projectEmployee.ProjectSchedules = project.ProjectSchedules;
-
-            // attach project to emploee
+            // attach project to employee
             _context.ProjectEmployee.Add(projectEmployee);
 
             await _context.SaveChangesAsync(cancellationToken);

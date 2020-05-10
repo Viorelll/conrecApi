@@ -27,6 +27,7 @@ namespace Conrec.Domain.Entities
         public int? AdditionalInformationId { get; set; }
         public virtual AdditionalInformation AdditionalInformation { get; set; }
         public virtual ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+        public virtual ICollection<ProjectPaymentEmployee> ProjectPaymentEmployees { get; set; }
         public virtual ICollection<Document> Documents { get; set; }
         #endregion
     }

@@ -44,6 +44,8 @@ namespace Conrec.Application.Employer.Commands.CreateProjectReport
                 .Where(x => x.ProjectId == request.ProjectId)
                 .FirstOrDefault();
 
+            if (projectEmployee == null) throw new Exception("The employee didn't have attached any project.");
+
             projectEmployee.ProjectReports.Add(projectReport);
 
             // save report on project

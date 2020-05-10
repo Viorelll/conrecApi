@@ -5,10 +5,11 @@ using MediatR;
 using Conrec.Domain.Entities;
 using Conrec.Persistence;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Conrec.Application.Employees.Queries.GetProjectSchedulePerWeek
 {
-    public class GetProjectSchedulePerWeekQueryHandler : IRequestHandler<GetProjectSchedulePerWeekQuery, ProjectSchedulePerWeekModel>
+    public class GetProjectSchedulePerWeekQueryHandler : IRequestHandler<GetProjectSchedulePerWeekQuery, List<ProjectSchedulePerWeekModel>>
     {
         private readonly ConrecDbContext _context;
 
@@ -17,7 +18,7 @@ namespace Conrec.Application.Employees.Queries.GetProjectSchedulePerWeek
             _context = context;
         }
 
-        public async Task<ProjectSchedulePerWeekModel> Handle(GetProjectSchedulePerWeekQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProjectSchedulePerWeekModel>> Handle(GetProjectSchedulePerWeekQuery request, CancellationToken cancellationToken)
         {
             var entity = await _context.Employee
                 .FindAsync(request.Id);
@@ -28,8 +29,6 @@ namespace Conrec.Application.Employees.Queries.GetProjectSchedulePerWeek
             }
 
             var activeProjectEmployee = entity.ProjectEmployees.Where(x => x.IsActive).FirstOrDefault();
-
-
 
             var result = ProjectSchedulePerWeekModel.Create(activeProjectEmployee);
 

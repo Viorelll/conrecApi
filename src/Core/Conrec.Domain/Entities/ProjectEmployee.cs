@@ -11,6 +11,8 @@ namespace Conrec.Domain.Entities
         public int Id { get; set; }
 
         public bool IsActive { get; set; }
+        public bool HasCustomSchedule { get; set; }
+        public bool IsHoursConfirmed { get; set; }
         public int TotalTimeWork { get; set; }
 
         #region Links
@@ -20,9 +22,7 @@ namespace Conrec.Domain.Entities
         public virtual Project Project { get; set; }
         public virtual ICollection<Report> ProjectReports { get; set; }
         public virtual Feedback ProjectFeedback { get; set; }
-
-        //public int? ScheduleId { get; set; }
-        public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }
+        public virtual ICollection<ProjectEmployeeSchedule> ProjectEmployeeSchedules { get; set; }
         #endregion
     }
 }

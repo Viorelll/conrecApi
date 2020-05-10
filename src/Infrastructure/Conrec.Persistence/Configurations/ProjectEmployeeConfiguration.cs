@@ -12,6 +12,10 @@ namespace Conrec.Persistence.Configurations
 
             builder.Property(e => e.IsActive);
 
+            builder.Property(e => e.HasCustomSchedule);
+
+            builder.Property(e => e.IsHoursConfirmed);
+
             #region Keys
 
             builder.HasKey(primaryKey => primaryKey.Id);
@@ -22,7 +26,7 @@ namespace Conrec.Persistence.Configurations
                .HasForeignKey(r => r.ProjectEmployeeId);
 
             builder
-               .HasMany(pe => pe.ProjectSchedules)
+               .HasMany(pe => pe.ProjectEmployeeSchedules)
                .WithOne(ps => ps.ProjectEmployee)
                .HasForeignKey(ps => ps.ProjectEmployeeId);
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Conrec.Persistence.Migrations
 {
-    public partial class Init_ConrecDB : Migration
+    public partial class Conrec_Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -304,7 +304,7 @@ namespace Conrec.Persistence.Migrations
                     BreakEnd = table.Column<DateTimeOffset>(nullable: false),
                     DayStart = table.Column<DateTimeOffset>(nullable: false),
                     DayEnd = table.Column<DateTimeOffset>(nullable: false),
-                    TotalHoursWorked = table.Column<double>(nullable: false),
+                    EstimatedWorkedHoursWeekly = table.Column<double>(nullable: false),
                     WorkDayId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -328,7 +328,7 @@ namespace Conrec.Persistence.Migrations
                     LastName = table.Column<string>(maxLength: 100, nullable: true),
                     Password = table.Column<string>(maxLength: 512, nullable: true),
                     Email = table.Column<string>(maxLength: 100, nullable: true),
-                    RegisterDate = table.Column<DateTimeOffset>(nullable: true),
+                    RegisterDate = table.Column<DateTimeOffset>(nullable: false),
                     UserRolesId = table.Column<int>(nullable: false),
                     RegionId = table.Column<int>(nullable: false)
                 },
@@ -356,7 +356,8 @@ namespace Conrec.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectId = table.Column<int>(nullable: true),
-                    PaymentId = table.Column<int>(nullable: true)
+                    PaymentId = table.Column<int>(nullable: true),
+                    ProjectPaymentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -424,7 +425,7 @@ namespace Conrec.Persistence.Migrations
                     NINO = table.Column<string>(maxLength: 100, nullable: true),
                     Experience = table.Column<int>(nullable: false),
                     AvailabilWorkImmediate = table.Column<bool>(nullable: false),
-                    AvailabilStartsOn = table.Column<DateTimeOffset>(nullable: true),
+                    AvailabilStartsOn = table.Column<DateTimeOffset>(nullable: false),
                     CountryId = table.Column<int>(nullable: false),
                     SkillId = table.Column<int>(nullable: false),
                     TeamId = table.Column<int>(nullable: true),
@@ -552,6 +553,8 @@ namespace Conrec.Persistence.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsActive = table.Column<bool>(nullable: false),
+                    HasCustomSchedule = table.Column<bool>(nullable: false),
+                    IsHoursConfirmed = table.Column<bool>(nullable: false),
                     TotalTimeWork = table.Column<int>(nullable: false),
                     EmployeeId = table.Column<int>(nullable: false),
                     ProjectId = table.Column<int>(nullable: false)
@@ -571,6 +574,32 @@ namespace Conrec.Persistence.Migrations
                         principalTable: "Project",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectPaymentEmployee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(nullable: true),
+                    ProjectPaymentId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectPaymentEmployee", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectPaymentEmployee_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProjectPaymentEmployee_ProjectPayment_ProjectPaymentId",
+                        column: x => x.ProjectPaymentId,
+                        principalTable: "ProjectPayment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -594,6 +623,34 @@ namespace Conrec.Persistence.Migrations
                         name: "FK_Feedback_ProjectEmployee_ProjectEmployeeId",
                         column: x => x.ProjectEmployeeId,
                         principalTable: "ProjectEmployee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectEmployeeSchedule",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EffectiveFrom = table.Column<DateTimeOffset>(nullable: false),
+                    EffectiveTo = table.Column<DateTimeOffset>(nullable: false),
+                    ScheduleId = table.Column<int>(nullable: true),
+                    ProjectEmployeeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectEmployeeSchedule", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectEmployeeSchedule_ProjectEmployee_ProjectEmployeeId",
+                        column: x => x.ProjectEmployeeId,
+                        principalTable: "ProjectEmployee",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProjectEmployeeSchedule_Schedule_ScheduleId",
+                        column: x => x.ScheduleId,
+                        principalTable: "Schedule",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -753,6 +810,16 @@ namespace Conrec.Persistence.Migrations
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProjectEmployeeSchedule_ProjectEmployeeId",
+                table: "ProjectEmployeeSchedule",
+                column: "ProjectEmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectEmployeeSchedule_ScheduleId",
+                table: "ProjectEmployeeSchedule",
+                column: "ScheduleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProjectPayment_PaymentId",
                 table: "ProjectPayment",
                 column: "PaymentId",
@@ -763,6 +830,16 @@ namespace Conrec.Persistence.Migrations
                 name: "IX_ProjectPayment_ProjectId",
                 table: "ProjectPayment",
                 column: "ProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectPaymentEmployee_EmployeeId",
+                table: "ProjectPaymentEmployee",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProjectPaymentEmployee_ProjectPaymentId",
+                table: "ProjectPaymentEmployee",
+                column: "ProjectPaymentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectSchedule_ProjectEmployeeId",
@@ -826,7 +903,10 @@ namespace Conrec.Persistence.Migrations
                 name: "Notification");
 
             migrationBuilder.DropTable(
-                name: "ProjectPayment");
+                name: "ProjectEmployeeSchedule");
+
+            migrationBuilder.DropTable(
+                name: "ProjectPaymentEmployee");
 
             migrationBuilder.DropTable(
                 name: "ProjectSchedule");
@@ -844,7 +924,7 @@ namespace Conrec.Persistence.Migrations
                 name: "ref_JobRole");
 
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "ProjectPayment");
 
             migrationBuilder.DropTable(
                 name: "Schedule");
@@ -853,13 +933,7 @@ namespace Conrec.Persistence.Migrations
                 name: "ProjectEmployee");
 
             migrationBuilder.DropTable(
-                name: "ref_Currency");
-
-            migrationBuilder.DropTable(
-                name: "ref_PaymentFrequency");
-
-            migrationBuilder.DropTable(
-                name: "ref_PaymentType");
+                name: "Payment");
 
             migrationBuilder.DropTable(
                 name: "ref_WorkDay");
@@ -869,6 +943,15 @@ namespace Conrec.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Project");
+
+            migrationBuilder.DropTable(
+                name: "ref_Currency");
+
+            migrationBuilder.DropTable(
+                name: "ref_PaymentFrequency");
+
+            migrationBuilder.DropTable(
+                name: "ref_PaymentType");
 
             migrationBuilder.DropTable(
                 name: "AdditionalInformation");

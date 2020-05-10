@@ -7,20 +7,20 @@ using Conrec.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
+namespace Conrec.Application.Employer.Commands.CreateProjectEmployeeSchedule
 {
-    public class CreateProjectScheduleCommandHandler : IRequestHandler<CreateProjectScheduleCommand, Unit>
+    public class CreateProjectEmployeeScheduleCommandHandler : IRequestHandler<CreateProjectEmployeeScheduleCommand, Unit>
     {
         private readonly ConrecDbContext _context;
 
-        public CreateProjectScheduleCommandHandler(ConrecDbContext context)
+        public CreateProjectEmployeeScheduleCommandHandler(ConrecDbContext context)
         {
             _context = context;
         }
-        public async Task<Unit> Handle(CreateProjectScheduleCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProjectEmployeeScheduleCommand request, CancellationToken cancellationToken)
         {
             var projectEmployee = await _context.ProjectEmployee
-                .Where(x => x.ProjectId == request.ProjectId)
+                .Where(x => x.EmployeeId == request.EmployeeId && x.ProjectId == request.ProjectId)
                 .SingleOrDefaultAsync();
 
             if (projectEmployee == null)
@@ -41,16 +41,16 @@ namespace Conrec.Application.Employer.Commands.CreateProjectSchedule
                 WorkDay = _context.WorkDay.Find(requestSchedule.WorkDayId)
             };
 
-            var projectSchedule = new ProjectSchedule
+            var projectEmployeeSchedule = new ProjectEmployeeSchedule
             {
                 EffectiveFrom = request.EffectiveFrom,
                 EffectiveTo = request.EffectiveTo,
                 Schedule = schedule,
-                ProjectId = projectEmployee.ProjectId
+                ProjectEmployeeId = projectEmployee.Id
             };
 
-            // save new project schedule for employee
-            _context.ProjectSchedule.Add(projectSchedule);
+            // save new project employee schedule
+            _context.ProjectEmployeeSchedule.Add(projectEmployeeSchedule);
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -39,7 +39,7 @@ namespace Conrec.Persistence.Configurations
                .HasForeignKey(p => p.ProjectId);
 
             builder
-               .HasMany(p => p.ProjectEmployeePayments)
+               .HasMany(p => p.ProjectPayments)
                .WithOne(ps => ps.Project)
                .HasForeignKey(p => p.ProjectId);
 

@@ -11,12 +11,13 @@ namespace Conrec.Domain.Entities
         public DateTimeOffset BreakEnd { get; set; }
         public DateTimeOffset DayStart { get; set; }
         public DateTimeOffset DayEnd { get; set; }
-        public double TotalHoursWorked { get; set; }
+        public double EstimatedWorkedHoursWeekly { get; set; }
 
         #region Links
         public int WorkDayId { get; set; }
         public virtual WorkDay WorkDay { get; set; }
         public virtual ICollection<ProjectSchedule> ProjectSchedules { get; set; }
+        public virtual ICollection<ProjectEmployeeSchedule> ProjectEmployeeSchedules { get; set; }
 
         #endregion
     }
